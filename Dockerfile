@@ -5,6 +5,7 @@ RUN \
   apt-get install -y \
   curl \
   wget \
+  git \
   iptables \
   php5-fpm \
   php5-mysql \
