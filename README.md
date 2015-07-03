@@ -14,3 +14,10 @@ php:
     links:
         - mysql
 ```
+
+## PHP version
+
+* PHP 5.6 (jessie stable)
+* PHP 5.4 (wheezy stable)
+* PHP 5.3 (squeeze stable)
+
