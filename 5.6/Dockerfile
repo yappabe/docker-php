@@ -1,5 +1,7 @@
 FROM debian:jessie
 
+ENV ENVIRONMENT dev
+
 RUN \
   apt-get update && \
   apt-get install -y \
