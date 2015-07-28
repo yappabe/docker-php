@@ -20,4 +20,5 @@ php:
 * PHP 5.6 (jessie stable)
 * PHP 5.4 (wheezy stable)
 * PHP 5.3 (squeeze stable)
+* PHP 7.0beta2 (jessie stable)
 
