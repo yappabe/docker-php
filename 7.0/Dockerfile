@@ -4,6 +4,9 @@ ENV ENVIRONMENT dev
 ENV PHP_INI_DIR /usr/local/etc/php
 ENV PHP_VERSION 7.0.0beta2
 
+RUN mkdir -p $PHP_INI_DIR/conf.d
+COPY php.ini "{$PHP_INI_DIR}/conf.d"
+
 RUN apt-get update && \
     apt-get install -y ca-certificates \
     curl \
@@ -19,16 +22,13 @@ RUN apt-get update && \
     make \
     pkg-config \
     re2c \
-    --no-install-recommends && \
-    rm -r /var/lib/apt/lists/*
-
-
-RUN mkdir -p $PHP_INI_DIR/conf.d
-COPY php.ini "{$PHP_INI_DIR}/conf.d"
-
-
-RUN buildDeps=" \
-    $PHP_EXTRA_BUILD_DEPS \
+    git-core \
+    bison \
+    libbz2-dev \
+    libmcrypt-dev \
+    libltdl-dev \
+    libpng-dev \
+    libpspell-dev \
     libcurl4-openssl-dev \
     libpcre3-dev \
     libreadline6-dev \
@@ -37,8 +37,10 @@ RUN buildDeps=" \
     libssl-dev \
     libxml2-dev \
     xz-utils \
-  " \
-  && set -x \
+    --no-install-recommends && \
+    rm -r /var/lib/apt/lists/*
+
+RUN set -x \
   && apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/* \
   && curl -SL "https://downloads.php.net/~ab/php-$PHP_VERSION.tar.xz" -o php.tar.xz \
   && mkdir -p /usr/src/php \
@@ -50,13 +52,39 @@ RUN buildDeps=" \
     --with-config-file-scan-dir="$PHP_INI_DIR/conf.d" \
     --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data \
     --disable-cgi \
-    --enable-mysqlnd \
-    --with-curl \
     --with-openssl \
     --with-pcre \
     --with-readline \
     --with-recode \
     --with-zlib \
+    --enable-bcmath \
+    --with-bz2 \
+    --enable-calendar \
+    --enable-exif \
+    --enable-dba \
+    --enable-ftp \
+    --with-gettext \
+    --with-gd \
+    --enable-mbstring \
+    --with-mcrypt \
+    --with-mhash \
+    --enable-mysqlnd \
+    --with-mysql=mysqlnd \
+    --with-mysqli=mysqlnd \
+    --with-pdo-mysql=mysqlnd \
+    --enable-pcntl \
+    --with-pspell \
+    --enable-shmop \
+    --enable-soap \
+    --enable-sockets \
+    --enable-sysvmsg \
+    --enable-sysvsem \
+    --enable-sysvshm \
+    --enable-wddx \
+    --with-zlib \
+    --enable-zip \
+    --with-readline \
+    --with-curl \
   && make -j"$(nproc)" \
   && make install \
   && { find /usr/local/bin /usr/local/sbin -type f -executable -exec strip --strip-all '{}' + || true; } \
