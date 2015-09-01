@@ -7,6 +7,7 @@ RUN \
   apt-get install -y \
   curl \
   wget \
+  vim \
   git \
   iptables \
   php5-fpm \

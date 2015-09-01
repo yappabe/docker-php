@@ -10,6 +10,7 @@ COPY php.ini "{$PHP_INI_DIR}/conf.d"
 RUN apt-get update && \
     apt-get install -y ca-certificates \
     curl \
+    vim \
     libpcre3 \
     librecode0 \
     libsqlite3-0 \
