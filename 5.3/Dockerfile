@@ -12,6 +12,7 @@ RUN echo "deb http://packages.dotdeb.org squeeze all" >> /etc/apt/sources.list.d
     apt-get update && \
     apt-get install -y \
     curl \
+    vim \
     wget \
     git \
     iptables \
