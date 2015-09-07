@@ -8,6 +8,7 @@ RUN \
   curl \
   wget \
   vim \
+  locales \
   git \
   iptables \
   php5-fpm \
