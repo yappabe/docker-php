@@ -30,7 +30,8 @@ RUN \
   php5-json \
   php5-redis \
   php5-twig \
-  php5-imagick
+  php5-imagick \
+  php5-xsl
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
