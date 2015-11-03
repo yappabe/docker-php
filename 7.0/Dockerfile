@@ -2,7 +2,7 @@ FROM debian:jessie
 
 ENV ENVIRONMENT dev
 ENV PHP_INI_DIR /usr/local/etc/php
-ENV PHP_VERSION 7.0.0RC5
+ENV PHP_VERSION 7.0.0RC6
 
 RUN mkdir -p $PHP_INI_DIR/conf.d
 COPY php.ini "{$PHP_INI_DIR}/conf.d"
