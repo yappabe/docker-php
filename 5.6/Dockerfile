@@ -9,6 +9,7 @@ RUN \
   wget \
   vim \
   git \
+  locales \
   iptables \
   php5-fpm \
   php5-mysql \
@@ -29,11 +30,32 @@ RUN \
   php5-json \
   php5-redis \
   php5-twig \
-  php5-imagick
+  php5-imagick \
+  php5-xsl
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN echo Europe/Brussels > /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
+
+RUN echo 'de_DE ISO-8859-1\n\
+de_DE.UTF-8 UTF-8\n\
+de_DE@euro ISO-8859-15\n\
+en_GB ISO-8859-1\n\
+en_GB.ISO-8859-15 ISO-8859-15\n\
+en_US ISO-8859-1\n\
+en_US.ISO-8859-15 ISO-8859-15\n\
+en_US.UTF-8 UTF-8\n\
+fr_FR ISO-8859-1\n\
+fr_FR.UTF-8 UTF-8\n\
+fr_FR@euro ISO-8859-15\n\
+nl_BE ISO-8859-1\n\
+nl_BE.UTF-8 UTF-8\n\
+nl_BE@euro ISO-8859-15\n\
+nl_NL ISO-8859-1\n\
+nl_NL.UTF-8 UTF-8\n\
+nl_NL@euro ISO-8859-15\n'\
+>> /etc/locale.gen &&  \
+usr/sbin/locale-gen
 
 RUN usermod -u 1000 www-data
 
