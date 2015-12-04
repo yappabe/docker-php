@@ -22,7 +22,7 @@ Eg: `image: yappabe/php:5.6`
 
 The following PHP versions are available:
 
-* PHP 7.0.0 RC8 (jessie stable)
+* PHP 7.0.0 (jessie stable)
 * PHP 5.6 (jessie stable)
 * PHP 5.4 (wheezy stable)
 * PHP 5.3 (squeeze stable)
