@@ -44,7 +44,7 @@ RUN apt-get update && \
 
 RUN set -x \
   && apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/* \
-  && curl -SL "https://downloads.php.net/~ab/php-$PHP_VERSION.tar.xz" -o php.tar.xz \
+  && curl -SL "http://be2.php.net/get/php-$PHP_VERSION.tar.xz/from/this/mirror" -o php.tar.xz \
   && mkdir -p /usr/src/php \
   && tar -xof php.tar.xz -C /usr/src/php --strip-components=1 \
   && rm php.tar.xz* \
