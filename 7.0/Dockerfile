@@ -6,7 +6,11 @@ RUN \
   apt-get update && \
   apt-get install -y \
   curl \
-  wget
+  wget \
+  git \
+  make \
+  autoconf
+
 
 RUN echo "deb http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.org.list && \
     echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.org.list && \
@@ -15,32 +19,46 @@ RUN echo "deb http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/
 RUN \
   apt-get update && \
   apt-get install -y \
-  curl \
-  wget \
   vim \
-  git \
   locales \
   iptables \
   php7.0-fpm \
   php7.0-mysql \
-  # php7.0-mcrypt \
   php7.0-gd \
-  # php7.0-memcached \
+  php7.0-dbg \
+  php7.0-dev \
   php7.0-curl \
-  # php-pear \
-  # php7.0-apcu \
   php7.0-opcache \
   php7.0-cli \
-  php7.0-curl \
   php7.0-sqlite \
   php7.0-intl \
   php7.0-tidy \
   php7.0-imap \
-  php7.0-json
-  # php7.0-redis \
-  # php7.0-twig \
-  # php7.0-imagick \
-  # php7.0-xsl
+  php7.0-json \
+  php7.0-phpdbg \
+  php7.0-pspell \
+  php7.0-recode \
+  php7.0-common \
+  php7.0-sybase \
+  php7.0-modules-source \
+  php7.0-sqlite3 \
+  libmemcached-dev \
+  libmemcached11 \
+  pkg-config
+
+RUN \
+  git clone https://github.com/php-memcached-dev/php-memcached && \
+  cd php-memcached && \
+  git checkout -b php7 origin/php7 && \
+  phpize && \
+  ./configure --with-php-config=/usr/bin/php-config && \
+  make && \
+  make install
+
+RUN \
+  echo "extension=memcached.so" >> /etc/php/mods-available/memcached.ini && \
+  /usr/sbin/phpenmod memcached
+
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
@@ -68,10 +86,10 @@ usr/sbin/locale-gen
 
 RUN usermod -u 1000 www-data
 
-COPY php.ini    /etc/php7.0/fpm/conf.d/
-COPY php.ini    /etc/php7.0/cli/conf.d/
-COPY www.conf   /etc/php7.0/fpm/pool.d/
+COPY php.ini    /etc/php/7.0/fpm/conf.d/
+COPY php.ini    /etc/php/7.0/cli/conf.d/
+COPY www.conf   /etc/php/7.0/fpm/pool.d/
 
 EXPOSE 9000
 
-CMD ["/usr/sbin/php7.0-fpm", "--allow-to-run-as-root", "-c", "/etc/php7.0/fpm", "--nodaemonize"]
+CMD ["/usr/sbin/php-fpm7.0", "--allow-to-run-as-root", "-c", "/etc/php/7.0/fpm", "--nodaemonize"]
