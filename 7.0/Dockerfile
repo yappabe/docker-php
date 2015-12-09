@@ -85,6 +85,7 @@ nl_NL@euro ISO-8859-15\n'\
 usr/sbin/locale-gen
 
 RUN usermod -u 1000 www-data
+RUN mkdir "/run/php"
 
 COPY php.ini    /etc/php/7.0/fpm/conf.d/
 COPY php.ini    /etc/php/7.0/cli/conf.d/
