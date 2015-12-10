@@ -47,6 +47,14 @@ RUN \
   pkg-config
 
 RUN \
+  git clone https://github.com/krakjoe/apcu.git && \
+  cd apcu && \
+  phpize && \
+  ./configure --with-php-config=/usr/bin/php-config && \
+  make && \
+  make install
+
+RUN \
   git clone https://github.com/php-memcached-dev/php-memcached && \
   cd php-memcached && \
   git checkout -b php7 origin/php7 && \
@@ -57,7 +65,12 @@ RUN \
 
 RUN \
   echo "extension=memcached.so" >> /etc/php/mods-available/memcached.ini && \
-  /usr/sbin/phpenmod memcached
+  echo "extension=apcu.so" >> /etc/php/mods-available/apcu.ini && \
+  ln -sf /etc/php/mods-available/memcached.ini /etc/php/7.0/fpm/conf.d/ && \
+  ln -sf /etc/php/mods-available/apcu.ini /etc/php/7.0/fpm/conf.d/ && \
+  ln -sf /etc/php/mods-available/memcached.ini /etc/php/7.0/cli/conf.d/ && \
+  ln -sf /etc/php/mods-available/apcu.ini /etc/php/7.0/cli/conf.d/
+
 
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -85,6 +98,7 @@ nl_NL@euro ISO-8859-15\n'\
 usr/sbin/locale-gen
 
 RUN usermod -u 1000 www-data
+RUN mkdir "/run/php"
 
 COPY php.ini    /etc/php/7.0/fpm/conf.d/
 COPY php.ini    /etc/php/7.0/cli/conf.d/
