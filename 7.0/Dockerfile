@@ -40,7 +40,6 @@ RUN \
   php7.0-recode \
   php7.0-common \
   php7.0-sybase \
-  php7.0-modules-source \
   php7.0-sqlite3 \
   libmemcached-dev \
   libmemcached11 \
@@ -71,9 +70,8 @@ RUN \
   ln -sf /etc/php/mods-available/memcached.ini /etc/php/7.0/cli/conf.d/ && \
   ln -sf /etc/php/mods-available/apcu.ini /etc/php/7.0/cli/conf.d/
 
-
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    composer global require hirak/prestissimo
 
 RUN echo Europe/Brussels > /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
 
