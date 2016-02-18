@@ -41,6 +41,8 @@ RUN \
   php7.0-common \
   php7.0-sybase \
   php7.0-sqlite3 \
+  php7.0-bz2 \
+  php7.0-mcrypt \
   libmemcached-dev \
   libmemcached11 \
   pkg-config
