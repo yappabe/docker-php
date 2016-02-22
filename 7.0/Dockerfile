@@ -44,6 +44,7 @@ RUN \
   php7.0-bz2 \
   php7.0-mcrypt \
   php7.0-common \
+  php7.0-xsl \
   libmemcached-dev \
   libmemcached11 \
   pkg-config
