@@ -43,6 +43,7 @@ RUN \
   php7.0-sqlite3 \
   php7.0-bz2 \
   php7.0-mcrypt \
+  php7.0-common \
   libmemcached-dev \
   libmemcached11 \
   pkg-config
