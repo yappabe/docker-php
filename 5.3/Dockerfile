@@ -63,10 +63,17 @@ usr/sbin/locale-gen
 
 RUN usermod -u 1000 www-data
 
+EXPOSE 9000
+
+ENV ENVIRONMENT dev
+ENV PHP_FPM_USER www-data
+ENV PHP_FPM_PORT 9000
+ENV PHP_ERROR_REPORTING "E_ALL \& ~E_NOTICE \& ~E_STRICT \& ~E_DEPRECATED"
+
 COPY php.ini    /etc/php5/fpm/conf.d/
 COPY php.ini    /etc/php5/cli/conf.d/
 COPY www.conf   /etc/php5/fpm/pool.d/
 
-EXPOSE 9000
+COPY run.sh /run.sh
 
-CMD ["/usr/sbin/php5-fpm", "--allow-to-run-as-root", "-c", "/etc/php5/fpm", "--nodaemonize"]
+ENTRYPOINT ["/bin/bash", "/run.sh"]
