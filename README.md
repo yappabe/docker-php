@@ -40,11 +40,11 @@ ENV PHP_ERROR_REPORTING "E_ALL \& ~E_NOTICE \& ~E_STRICT \& ~E_DEPRECATED"
 
 ## Development and permissions
 
-Run php-fpm process as `root` user to avoid cli and fpm permission collissions.
+Run php-fpm process as `root` user to avoid cli and fpm permission issues.
 Never ever use this in production!
 
 ```
-ENV PHP_FPM_USER www-data
+ENV PHP_FPM_USER root
 ```
 
 
