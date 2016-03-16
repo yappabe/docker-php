@@ -1,16 +1,11 @@
 FROM debian:jessie
 
-ENV ENVIRONMENT dev
-
 RUN \
   apt-get update && \
   apt-get install -y \
   curl \
   wget \
-  git \
-  make \
-  autoconf
-
+  git
 
 RUN echo "deb http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.org.list && \
     echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.org.list && \
@@ -25,6 +20,7 @@ RUN \
   php7.0-fpm \
   php7.0-mysql \
   php7.0-gd \
+  php7.0-imagick \
   php7.0-dbg \
   php7.0-dev \
   php7.0-curl \
@@ -44,34 +40,9 @@ RUN \
   php7.0-bz2 \
   php7.0-mcrypt \
   php7.0-common \
-  libmemcached-dev \
-  libmemcached11 \
-  pkg-config
-
-RUN \
-  git clone https://github.com/krakjoe/apcu.git && \
-  cd apcu && \
-  phpize && \
-  ./configure --with-php-config=/usr/bin/php-config && \
-  make && \
-  make install
-
-RUN \
-  git clone https://github.com/php-memcached-dev/php-memcached && \
-  cd php-memcached && \
-  git checkout -b php7 origin/php7 && \
-  phpize && \
-  ./configure --with-php-config=/usr/bin/php-config && \
-  make && \
-  make install
-
-RUN \
-  echo "extension=memcached.so" >> /etc/php/mods-available/memcached.ini && \
-  echo "extension=apcu.so" >> /etc/php/mods-available/apcu.ini && \
-  ln -sf /etc/php/mods-available/memcached.ini /etc/php/7.0/fpm/conf.d/ && \
-  ln -sf /etc/php/mods-available/apcu.ini /etc/php/7.0/fpm/conf.d/ && \
-  ln -sf /etc/php/mods-available/memcached.ini /etc/php/7.0/cli/conf.d/ && \
-  ln -sf /etc/php/mods-available/apcu.ini /etc/php/7.0/cli/conf.d/
+  php7.0-apcu \
+  php7.0-memcached \
+  php7.0-redis
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     composer global require hirak/prestissimo
@@ -101,10 +72,16 @@ usr/sbin/locale-gen
 RUN usermod -u 1000 www-data
 RUN mkdir "/run/php"
 
+ENV ENVIRONMENT dev
+ENV PHP_FPM_USER www-data
+ENV PHP_FPM_PORT 9000
+ENV PHP_ERROR_REPORTING "E_ALL \& ~E_NOTICE \& ~E_STRICT \& ~E_DEPRECATED"
+
 COPY php.ini    /etc/php/7.0/fpm/conf.d/
 COPY php.ini    /etc/php/7.0/cli/conf.d/
 COPY www.conf   /etc/php/7.0/fpm/pool.d/
+ADD  run.sh /run.sh
 
-EXPOSE 9000
+COPY run.sh /run.sh
 
-CMD ["/usr/sbin/php-fpm7.0", "--allow-to-run-as-root", "-c", "/etc/php/7.0/fpm", "--nodaemonize"]
+ENTRYPOINT ["/bin/bash", "/run.sh"]
