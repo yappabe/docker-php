@@ -45,7 +45,9 @@ RUN \
   php7.0-redis
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
-    composer global require hirak/prestissimo
+    composer global require hirak/prestissimo && \
+    wget http://robo.li/robo.phar && \
+    chmod +x robo.phar && mv robo.phar /usr/bin/robo
 
 RUN echo Europe/Brussels > /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
 
