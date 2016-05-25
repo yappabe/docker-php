@@ -40,7 +40,7 @@ RUN \
   php7.0-bz2 \
   php7.0-mcrypt \
   php7.0-common \
-  php7.0-apcu \
+  php7.0-apcu-bc \
   php7.0-memcached \
   php7.0-redis
 
