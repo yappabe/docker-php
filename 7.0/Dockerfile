@@ -31,7 +31,6 @@ RUN \
   php7.0-tidy \
   php7.0-imap \
   php7.0-json \
-  php7.0-phpdbg \
   php7.0-pspell \
   php7.0-recode \
   php7.0-common \
