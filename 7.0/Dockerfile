@@ -21,7 +21,6 @@ RUN \
   php7.0-mysql \
   php7.0-gd \
   php7.0-imagick \
-  php7.0-dbg \
   php7.0-dev \
   php7.0-curl \
   php7.0-opcache \
