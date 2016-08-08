@@ -42,7 +42,10 @@ RUN \
   php7.0-common \
   php7.0-apcu-bc \
   php7.0-memcached \
-  php7.0-redis
+  php7.0-redis \
+  php7.0-xml \
+  php7.0-shmop \
+  php7.0-mbstring
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     composer global require hirak/prestissimo && \
