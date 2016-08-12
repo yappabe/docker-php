@@ -37,7 +37,8 @@ RUN echo "deb http://packages.dotdeb.org squeeze all" >> /etc/apt/sources.list.d
     php5-imagick
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
-    composer global require hirak/prestissimo
+    composer global require hirak/prestissimo && \
+    composer global require phpro/grumphp
 
 RUN echo Europe/Brussels > /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
 
@@ -69,6 +70,7 @@ ENV ENVIRONMENT dev
 ENV PHP_FPM_USER www-data
 ENV PHP_FPM_PORT 9000
 ENV PHP_ERROR_REPORTING "E_ALL \& ~E_NOTICE \& ~E_STRICT \& ~E_DEPRECATED"
+ENV PATH "$HOME/.composer/vendor/bin:$PATH"
 
 COPY php.ini    /etc/php5/fpm/conf.d/
 COPY php.ini    /etc/php5/cli/conf.d/
