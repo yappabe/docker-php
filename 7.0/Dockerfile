@@ -48,6 +48,7 @@ RUN \
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     composer global require hirak/prestissimo && \
+    composer global require phpro/grumphp && \
     wget http://robo.li/robo.phar && \
     chmod +x robo.phar && mv robo.phar /usr/bin/robo
 
@@ -80,6 +81,7 @@ ENV ENVIRONMENT dev
 ENV PHP_FPM_USER www-data
 ENV PHP_FPM_PORT 9000
 ENV PHP_ERROR_REPORTING "E_ALL \& ~E_NOTICE \& ~E_STRICT \& ~E_DEPRECATED"
+ENV PATH "/root/.composer/vendor/bin:$PATH"
 
 COPY php.ini    /etc/php/7.0/fpm/conf.d/
 COPY php.ini    /etc/php/7.0/cli/conf.d/
