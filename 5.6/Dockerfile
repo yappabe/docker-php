@@ -14,6 +14,7 @@ RUN \
   php5-mcrypt \
   php5-gd \
   php5-memcached \
+  php5-memcache \
   php5-curl \
   php-pear \
   php5-apcu \
