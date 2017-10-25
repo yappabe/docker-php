@@ -85,6 +85,7 @@ ENV PHP_FPM_USER www-data
 ENV PHP_FPM_PORT 9000
 ENV PHP_ERROR_REPORTING "E_ALL \& ~E_NOTICE \& ~E_STRICT \& ~E_DEPRECATED"
 ENV PATH "/root/.composer/vendor/bin:$PATH"
+ENV COMPOSER_ALLOW_SUPERUSER 1
 
 COPY php.ini    /etc/php/7.1/fpm/conf.d/
 COPY php.ini    /etc/php/7.1/cli/conf.d/
