@@ -45,6 +45,7 @@ RUN \
   php7.2-shmop \
   php7.2-mbstring \
   php7.2-zip \
+  php7.2-bcmath \
   php7.2-soap
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
