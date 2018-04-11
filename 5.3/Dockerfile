@@ -34,6 +34,7 @@ RUN echo "deb http://packages.dotdeb.org squeeze all" >> /etc/apt/sources.list.d
     php5-imap \
     php5-imagick \
     php5-json \
+    php5-bcmath \
     php5-imagick
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
