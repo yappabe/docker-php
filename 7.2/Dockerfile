@@ -26,7 +26,6 @@ RUN \
   php7.2-curl \
   php7.2-opcache \
   php7.2-cli \
-  php7.2-sqlite \
   php7.2-intl \
   php7.2-tidy \
   php7.2-imap \
@@ -47,6 +46,9 @@ RUN \
   php7.2-zip \
   php7.2-bcmath \
   php7.2-soap
+
+
+RUN pecl install xdebug-2.6.1
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     composer global require hirak/prestissimo && \
