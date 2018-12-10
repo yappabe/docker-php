@@ -39,7 +39,7 @@ RUN \
   php7.3-bz2 \
   php7.3-common \
   php7.3-apcu-bc \
-  #php7.3-memcached \
+  php7.3-memcached \
   php7.3-redis \
   php7.3-xml \
   php7.3-shmop \
