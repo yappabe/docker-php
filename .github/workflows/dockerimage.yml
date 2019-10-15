@@ -1,0 +1,21 @@
+name: Docker Image CI
+
+on: [push, pull_request]
+
+jobs:
+
+  build:
+    name: Testing build ${{ matrix.php_version }}
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php_version: ["5.6", "7.0", "7.1", "7.2", "7.3"]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build PHP ${{ matrix.php_version }}
+      run: docker build ${{ matrix.php_version }}/ --tag php:${{ matrix.php_version }}
+
