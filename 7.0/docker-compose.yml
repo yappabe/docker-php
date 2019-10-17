@@ -1,8 +1,0 @@
-php:
-    build: .
-    working_dir: /var/www/app
-    environment:
-        PHP_FPM_USER: root
-        PHP_FPM_PORT: 9000
-        PHP_ERROR_REPORTING: E_ALL
-        ENVIRONMENT: staging
