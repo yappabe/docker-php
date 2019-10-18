@@ -18,10 +18,11 @@ php:
 
 To use a specific PHP version, append the version number to the image name.
 
-Eg: `image: yappabe/php:7.2`
+Eg: `image: yappabe/php:7.3`
 
 The following PHP versions are available:
 
+* PHP 7.3 (jessie stable)
 * PHP 7.2 (jessie stable)
 * PHP 7.1 (jessie stable)
 
