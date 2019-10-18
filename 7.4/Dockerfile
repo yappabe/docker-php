@@ -22,7 +22,7 @@ RUN \
   php7.4-fpm \
   php7.4-mysql \
   php7.4-gd \
-#  php7.4-imagick \
+  php7.4-imagick \
   php7.4-dev \
   php7.4-curl \
   php7.4-opcache \
@@ -33,15 +33,15 @@ RUN \
   php7.4-imap \
   php7.4-json \
   php7.4-pspell \
-#  php7.4-recode \
+  php7.4-recode \
   php7.4-common \
   php7.4-sybase \
   php7.4-sqlite3 \
   php7.4-bz2 \
   php7.4-common \
-#  php7.4-apcu-bc \
-#  php7.4-memcached \
-#  php7.4-redis \
+  php7.4-apcu-bc \
+  php7.4-memcached \
+  php7.4-redis \
   php7.4-xml \
   php7.4-shmop \
   php7.4-mbstring \
