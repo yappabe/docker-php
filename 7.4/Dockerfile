@@ -33,7 +33,6 @@ RUN \
   php7.4-imap \
   php7.4-json \
   php7.4-pspell \
-  php7.4-recode \
   php7.4-common \
   php7.4-sybase \
   php7.4-sqlite3 \
