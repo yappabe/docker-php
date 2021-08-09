@@ -31,7 +31,6 @@ RUN \
   php8.0-intl \
   php8.0-tidy \
   php8.0-imap \
-  php8.0-json \
   php8.0-pspell \
   php8.0-common \
   php8.0-sybase \
@@ -48,10 +47,7 @@ RUN \
   php8.0-bcmath \
   php8.0-soap
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
-    composer global require hirak/prestissimo && \
-    wget http://robo.li/robo.phar && \
-    chmod +x robo.phar && mv robo.phar /usr/bin/robo
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN echo Europe/Brussels > /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
 
