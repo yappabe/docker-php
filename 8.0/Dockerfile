@@ -37,7 +37,7 @@ RUN \
   php8.0-sqlite3 \
   php8.0-bz2 \
   php8.0-common \
-  php8.0-apcu-bc \
+  php8.0-apcu \
   php8.0-memcached \
   php8.0-redis \
   php8.0-xml \
