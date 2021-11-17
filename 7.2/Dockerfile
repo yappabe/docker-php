@@ -1,21 +1,20 @@
-FROM debian:jessie
+FROM debian:bullseye
 
 RUN \
   apt-get update && \
-  apt-get install -y \
+  apt-get install -y --no-install-recommends \
   curl \
-  wget \
-  apt-transport-https \
   lsb-release \
   ca-certificates \
-  git
+  git \
+  gnupg2
 
-RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
+RUN apt-key adv --fetch-keys 'https://packages.sury.org/php/apt.gpg' && \
     echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
 
 RUN \
   apt-get update && \
-  apt-get install -y \
+  apt-get install -y --no-install-recommends \
   vim \
   locales \
   php7.2-fpm \
@@ -48,10 +47,7 @@ RUN \
   php7.2-bcmath \
   php7.2-soap
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
-    composer global require hirak/prestissimo && \
-    wget http://robo.li/robo.phar && \
-    chmod +x robo.phar && mv robo.phar /usr/bin/robo
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN echo Europe/Brussels > /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
 

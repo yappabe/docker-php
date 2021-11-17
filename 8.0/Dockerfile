@@ -1,17 +1,15 @@
-FROM debian:buster
+FROM debian:bullseye
 
 RUN \
   apt-get update && \
   apt-get install -y \
   curl \
-  wget \
-  apt-transport-https \
   lsb-release \
   ca-certificates \
   gnupg2 \
   git
 
-RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
+RUN apt-key adv --fetch-keys 'https://packages.sury.org/php/apt.gpg' && \
     echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
 
 RUN \
