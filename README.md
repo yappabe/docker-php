@@ -28,6 +28,8 @@ The following PHP versions are available:
 * PHP 7.3 (bullseye stable)
 * PHP 7.2 (bullseye stable)
 * PHP 7.1 (bullseye stable)
+* PHP 7.0 (bullseye stable)
+* PHP 5.6 (bullseye stable)
 
 ## Configurations
 
