@@ -37,4 +37,4 @@ jobs:
         with:
           context: ${{ matrix.php_version }}/
           push: true
-          tags: ${{ secrets.DOCKER_HUB_NAMESPACE }}/php:${{ matrix.php_version }}
+          tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/php:${{ matrix.php_version }}
