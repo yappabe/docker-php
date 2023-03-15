@@ -1,0 +1,40 @@
+name: Create and publish image on github
+
+on:
+  push:
+    branches: ['master']
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php_version: [ "5.6", "7.0", "7.1", "7.2", "7.3", "7.4", "8.0", "8.1" ]
+        
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Build and push ${{ matrix.php_version }}
+        uses: docker/build-push-action@v2
+        with:
+          context: ${{ matrix.php_version }}/
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_NAMESPACE }}/php:${{ matrix.php_version }}
